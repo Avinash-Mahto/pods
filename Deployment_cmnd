@@ -1,0 +1,35 @@
+##Creating a Deployment
+kubectl create -f
+
+##Updaing a deployment
+
+kubectl set image deployment/nginx-deployment nginx=nginx:1.16.1 --record
+
+## Checking Rollout Sttaus
+
+kubectl rollout status deployment.v1.apps/nginx-deployment
+
+## Checking Rollout History of a Deployment
+kubectl rollout history deployment.v1.apps/nginx-deployment
+
+## Details of each revision
+kubectl rollout history deployment.v1.apps/nginx-deployment --revision=2
+
+
+## Rolling Back to a Previous Revision
+kubectl rollout undo deployment.v1.apps/nginx-deployment --to-revision=2
+
+## Scaling a deployment
+kubectl scale deployment.v1.apps/nginx-deployment --replicas=10
+
+## Autoscaling
+kubectl autoscale deployment.v1.apps/nginx-deployment --min=10 --max=15 --cpu-percent=80
+
+## Pausing Deployemnt
+
+kubectl rollout pause deployment.v1.apps/nginx-deployment
+kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:1.16.1
+
+
+## Resuming Deployment
+kubectl rollout resume deployment.v1.apps/nginx-deployment
